@@ -1,0 +1,3 @@
+gcc -g -shared -o plugin.so -Wall -fPIC -I /riscv-gnu-toolchain/spike/ plugin.c &&
+riscv64-unknown-linux-gnu-gcc -g -nostdlib -static -Wl,-Ttext-segment,0x80000000 plugin_test.S -o plugin_test &&
+spike -m8192 --extlib=./plugin.so --device=test_mmio_plugin,0x10000000,argument plugin_test
